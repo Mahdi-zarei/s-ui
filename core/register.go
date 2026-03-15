@@ -27,7 +27,6 @@ import (
 	"github.com/sagernet/sing-box/protocol/shadowtls"
 	"github.com/sagernet/sing-box/protocol/socks"
 	"github.com/sagernet/sing-box/protocol/ssh"
-	"github.com/sagernet/sing-box/protocol/tailscale"
 	"github.com/sagernet/sing-box/protocol/tor"
 	"github.com/sagernet/sing-box/protocol/trojan"
 	"github.com/sagernet/sing-box/protocol/tuic"
@@ -36,7 +35,6 @@ import (
 	"github.com/sagernet/sing-box/protocol/vmess"
 	"github.com/sagernet/sing-box/protocol/wireguard"
 	"github.com/sagernet/sing-box/service/ccm"
-	"github.com/sagernet/sing-box/service/derp"
 	"github.com/sagernet/sing-box/service/ocm"
 	"github.com/sagernet/sing-box/service/resolved"
 	"github.com/sagernet/sing-box/service/ssmapi"
@@ -103,7 +101,6 @@ func EndpointRegistry() *endpoint.Registry {
 	registry := endpoint.NewRegistry()
 
 	wireguard.RegisterEndpoint(registry)
-	tailscale.RegisterEndpoint(registry)
 
 	return registry
 }
@@ -122,7 +119,6 @@ func DNSTransportRegistry() *dns.TransportRegistry {
 	quic.RegisterTransport(registry)
 	quic.RegisterHTTP3Transport(registry)
 	dhcp.RegisterTransport(registry)
-	tailscale.RegistryTransport(registry)
 
 	return registry
 }
@@ -133,7 +129,6 @@ func ServiceRegistry() *service.Registry {
 	resolved.RegisterService(registry)
 	ssmapi.RegisterService(registry)
 
-	derp.Register(registry)
 	ccm.RegisterService(registry)
 	ocm.RegisterService(registry)
 
